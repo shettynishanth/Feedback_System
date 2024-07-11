@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url("feedback images/049271371f9cd36f476d6bbeada585e2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-position: justify;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background: linear-gradient(to bottom, #f21313, #ecec07);
+  color: #fff;
+  width: 250px;
+  padding: 20px;
+  border-radius: 5%;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 40px;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 25px 0;
+  transition: background-color 0.3s;
+  border-radius: 10px; /* Add border radius to create round corners */
+}
+
+.sidebar a:hover {
+  background-color: #f9956a;
+  transform: translateX(5px);
+}
+
+.sidebar a.active {
+  font-weight: bold;
+  /* background-color: #f9956a; Change background color when selected */
+}
+
+.sidebar .dashboard {
+  margin-top: 10px; /* Adjust the top margin for the "Dashboard" module */
+  background-color: #7c26ed; /* Fix the background color of the "Dashboard" module */
+}
+
+.sidebar .admin-header {
+  text-decoration: underline; 
+/* Add underline to the admin header */
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  color: #f6f6f6;
+}
+
+.content h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+/* Example animation */
+.content h1:hover {
+  animation: colorChange 1s infinite alternate;
+}
+h1{
+  position: absolute;
+  top: 20%;
+  left: 60%;
+  transform: translate(-50%, -70%);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 5px;
+  color: #fff;
+}
+@keyframes colorChange {
+  from {
+    color: #f0c529;
+  }
+  to {
+    color: #ff0000;
+  }
+}

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Feedback Form Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image: url('k2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    h3 {
+      color: white;
+    }
+
+    form {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: white;
+    }
+
+    input[type="text"],
+    select,
+    textarea {
+      width: 200px;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button {
+      padding: 8px 12px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #optionsContainer {
+      margin-top: 10px;
+    }
+
+    #optionsList div {
+      margin-bottom: 5px;
+    }
+
+    #generatedForm {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+
+    /* Additional styles for selected options */
+    input[type="radio"]:checked + label,
+    input[type="checkbox"]:checked + label,
+    input[type="range"]:focus + label,
+    .generated-field {
+      color: white;
+    }
+
+    input[type="radio"]:checked + label::before,
+    input[type="checkbox"]:checked + label::before {
+      background-color: rgb(245, 245, 250);
+    }
+  </style>
+</head>
+<body>
+  <h2>Feedback Form Generator</h2>
+
+  <form id="formGenerator">
+    <P id="ptag" style="color:white;"></P>
+    <label for="question">Question:</label>
+    <input type="text" id="question" name="question" required><br><br>
+
+    <label for="answerType">Answer Type:</label>
+    <select id="answerType" required name="answerType" onchange="handleAnswerTypeChange()">
+      <option value="text">Text Box</option>
+      <option value="radio">Radio Button</option>
+      
+      <option value="checkbox">Checkbox</option>
+      <option value="range">Range</option>
+    </select><br><br>
+
+    <div id="optionsContainer" style="display: none;">
+      <label for="options">Options:</label><br>
+      <div id="optionsList"></div>
+      <input type="text" id="optionText" name="optionText" style="display: none;">
+      <button type="button" onclick="addOption()">Add Option</button><br><br>
+    </div>
+
+    <button type="button" onclick="generateField()">Generate Field</button>
+    <button type="button" id="submitBtn" onclick="redirectPHP()" disabled>genearate feedback room</button>
+    <a href='dash.html'>back</a>
+  </form>
+
+  <h3>Generated Form:</h3>
+  <div id="generatedForm"></div>
+
+  <script>
+    function handleAnswerTypeChange() {
+      var answerType = document.getElementById('answerType').value;
+      var optionsContainer = document.getElementById('optionsContainer');
+      var optionsList = document.getElementById('optionsList');
+      var optionText = document.getElementById('optionText');
+
+      if (answerType === 'radio' || answerType === 'checkbox') {
+        optionsContainer.style.display = 'block';
+        optionsList.innerHTML = '';
+        optionText.style.display = 'block';
+      } else {
+        optionsContainer.style.display = 'none';
+        optionText.style.display = 'none';
+      }
+    }
+
+    function addOption() {
+      var optionText = document.getElementById('optionText').value.trim();
+      var optionsList = document.getElementById('optionsList');
+
+      if (optionText !== '') {
+        var optionItem = document.createElement('div');
+        optionItem.innerHTML = `
+          <input type="${getOptionType()}" name="options" value="${optionText}"> <label>${optionText}</label><br>
+        `;
+        optionsList.appendChild(optionItem);
+        document.getElementById('optionText').value = '';
+      }
+    }
+
+    function generateField() {
+      var question = document.getElementById('question').value;
+      var answerType = document.getElementById('answerType').value;
+      var optionsContainer = document.getElementById('optionsContainer');
+      var optionsList = document.getElementById('optionsList');
+      var options = optionsList.getElementsByTagName('input');
+
+      if (answerType === 'radio' || answerType === 'checkbox') {
+        if (options.length < 2) {
+          alert('Please provide at least two options for radio button or checkbox.');
+          return;
+        }
+      }
+
+      var field = '';
+
+      if (answerType === 'radio') {
+        field = `
+          <label for="${question}">${question}</label><br>
+        `;
+        for (var i = 0; i < options.length; i++) {
+          var option = options[i];
+          field += `
+            <input type="${getOptionType()}" name="${question}" value="${option.value}" required> <label>${option.nextElementSibling.textContent}</label><br>
+          `;
+        }
+        field += `<br>`;
+      } else if (answerType === 'text') {
+        field = `
+          <label for="${question}">${question}</label><br>
+          <textarea name="${question}" rows="4" cols="30" required></textarea><br><br>
+        `;
+      } else if (answerType === 'checkbox') {
+        field = `
+          <label for="${question}" >${question}</label><br>
+        `;
+        for (var i = 0; i < options.length; i++) {
+          var option = options[i];
+          var uniqueName = question + '_' + i;
+          field += `
+            <input type="${getOptionType()}" checked name="${uniqueName}" value="${option.value}"> <label>${option.nextElementSibling.textContent}</label><br>
+          `;
+        }
+        field += `<br>`;
+      } else if (answerType === 'range') {
+        field = `
+          <label for="${question}">${question}</label><br>
+          <input type="range" name="${question}" min="0" max="100" step="1" required> <label>${question}</label><br><br>
+        `;
+      }
+
+      var generatedField = document.createElement('div');
+      generatedField.className = 'generated-field'; // Apply the class to set text color to white
+      generatedField.innerHTML = field;
+      document.getElementById('generatedForm').appendChild(generatedField);
+      document.getElementById('question').value = '';
+      document.getElementById('optionsList').innerHTML = '';
+      var x=document.getElementById('ptag');
+      x.innerHTML="please select atleast one textbox";
+      if (answerType === 'radio' || answerType === 'checkbox') {
+        optionsContainer.style.display = 'block';
+      } else {
+        optionsContainer.style.display = 'none';
+        var submitBtn = document.getElementById('submitBtn');
+      if (document.getElementById('generatedForm').children.length > 0) {
+        submitBtn.disabled = false;
+       
+      } else {
+        submitBtn.disabled = true;
+      }
+      }
+    }
+
+    function getOptionType() {
+      var answerType = document.getElementById('answerType').value;
+      return answerType === 'radio' ? 'radio' : 'checkbox';
+    }
+
+    function redirectPHP() {
+      var generatedHTML = document.getElementById('generatedForm').innerHTML;
+      var url = 'save_form.php?html=' + encodeURIComponent(generatedHTML);
+      window.location.href = url;  
+    }
+  </script>
+</body>
+</html>

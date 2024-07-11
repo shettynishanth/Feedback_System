@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="pdash.css">
+    <title>Document</title>
+   
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: sans-serif;
+    background-image: url(p1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 90vh;
+    background-position-y:100px ;
+}
+
+.menubar{
+    background-color:black;
+   height: 100px;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0 5%;
+   opacity: 0.7;
+}
+.logo{
+    color: rgb(254, 4, 4);
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.logo a{
+    text-decoration: none;
+    color: red;
+}
+
+.logo a:hover{
+    color: blue;
+}
+
+.menubar ul{
+    list-style: none;
+    display: flex;
+}
+.menubar ul li{
+    padding: 10px 30px;  
+    position: relative;
+}
+.menubar ul li a{
+    color: rgb(249, 245, 245);
+    text-decoration: none;
+    font-size: 20px;
+    transition: all 0.3s;
+}
+.menubar ul li a:hover{
+    color: blue;
+}
+.dropdownmenu{
+    display: none;
+}
+.menubar ul li:hover .dropdownmenu{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: black;
+}
+.dropdownmenu ul{
+display: block;
+margin: 10px;
+}
+.dropdownmenu ul li{
+    width: 150px;
+    padding: 10px;
+}
+</style>
+<body>
+    <div class="menubar">
+        <h1 class="logo"><a href="pdash.html">User</a></h1>
+            <ul>
+                <li>
+                    <a href="#">Manage Feedback<i class="fas fa-caret-down"></i></a>
+                <div class="dropdownmenu">
+                <ul>
+                    <li><a href="createfeedback.html">Create Feedback</label></li>
+                    <li><a href="delete.php">Delete Feedback</a></li>
+                </ul>
+                 </div>
+                </li>
+                <li>
+                    <a href="view.php">My Feedback<i class="fas fa-caret-down"></i>   </a>
+                    
+                </li>
+                <li><a href="udprofile.php">Update Profile</a></li>
+                <li><a href="../signin.html">Logout</a></li>
+
+            </ul>
+
+    </div>
+
+</body>
+
+</html> 

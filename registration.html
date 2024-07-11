@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Registration</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <form action="registration.php" method="POST" enctype="multipart/form-data">
+      <h1>Registration</h1>
+      <label for="firstname">First Name:</label>
+      <input type="text" id="firstname" name="firstname" required>
+      <br>
+      <label for="lastname">Last Name:</label>
+      <input type="text" id="lastname" name="lastname" required>
+      <br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <br>
+      <label for="pass">Password:</label>
+      <input type="password" id="pass" name="pass" required>
+      <br> 
+      <label for="phonenumber">Phone Number:</label>
+      <input type="number" id="phonenumber" name="phonenumber" max="9999999999" min="1000000000" required>
+      <br> 
+      <label for="opn">Occupation:</label>
+      <select id="opn" name="occupation">
+        <option value="">---</option>
+        <option value="student">student</option>
+        <option value="Business">Business</option>
+        <option value="other">Other</option>
+      </select>
+      <br>
+      <label for="image">Document:</label>
+      <input type="file" name="image" id="image" required>
+      <!-- <label for="dob">Date of Birth:</label> -->
+      <!-- <input type="date" id="dob" name="dob" required> -->
+      <br>
+     
+      <input type="submit" value="Submit">
+      <p>Already Registerd?
+      <a id="reg" href="signin.html">Sign in here</a></p>
+      <h3><a href="mng.html">Back</a></h3>
+
+    </form>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+body {
+  background-image: url('');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+
+form {
+  margin: 4px auto;
+  max-width: 350px;
+  padding: 30px;
+  background-color: rgba(255,255,255,0.6);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #111010;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #080000;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+input[type="submit"] {
+  width: 30%;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border: white;
+  margin-left: 8rem;
+  background-color: #007FFF;
+  color: #FFFFFF;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.5s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: #005BC5;
+}
+
+::-webkit-input-placeholder {
+  color: #999999;
+}
+
+:-moz-placeholder {
+  color: #999999;
+}
+
+::-moz-placeholder {
+  color: #999999;
+}
+
+:-ms-input-placeholder {
+  color: #999999;
+}
